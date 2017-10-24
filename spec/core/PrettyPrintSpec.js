@@ -250,11 +250,8 @@ describe("jasmineUnderTest.pp", function () {
       toString: function () { return Object.prototype.toString.call(this); }
     };
 
-    if (jasmine.getEnv().ieVersion < 9) {
-      expect(jasmineUnderTest.pp(objFromOtherContext)).toEqual("Object({ foo: 'bar' })");
-    } else {
-      expect(jasmineUnderTest.pp(objFromOtherContext)).toEqual("Object({ foo: 'bar', toString: Function })");
-    }
+
+    expect(jasmineUnderTest.pp(objFromOtherContext)).toEqual("Object({ foo: 'bar', toString: Function })");
   });
 
   it("should stringify objects have have a toString that isn't a function", function() {
@@ -279,8 +276,6 @@ describe("jasmineUnderTest.pp", function () {
   });
 
   it("should handle objects with null prototype", function() {
-    if (jasmine.getEnv().ieVersion < 9) { return; }
-
     var obj = Object.create(null);
     obj.foo = 'bar';
 
